@@ -1,4 +1,5 @@
 
+import random
 
 from os import system, name  # define our clear function 
 
@@ -42,17 +43,67 @@ def playGame():
                 clear()
                 printBoard(currentBoard)
                 selection = input("Incorrect selection. Where would you like to place an 'X'?")  
-            currentBoard[selection] = 'X'   
-        #player2
+            currentBoard[selection] = 'X'  
+
         elif turn in computerTurn:
-            selection = 'wrong'
-            selection = input("It is your turn. Where would you like to place an 'O'?")
-            while selection not in currentBoard or currentBoard[selection] in symbols:
-                clear()
-                printBoard(currentBoard)
-                selection = input("Incorrect selection. Where would you like to place an 'O'?")  
-            currentBoard[selection] = 'O'   
-                
+            boardAtStartOfTurn = currentBoard
+            if currentBoard['5'] not in symbols:
+                currentBoard['5'] = 'O'
+            elif currentBoard['5'] == 'O':
+                if currentBoard['7'] and currentBoard['3'] != 'X': 
+                    if currentBoard['7'] == 'O':
+                        currentBoard['3'] = 'O'
+                    elif currentBoard['3'] == 'O':
+                        currentBoard['7'] = 'O'
+                elif currentBoard['1'] and currentBoard['9'] != 'X': 
+                    if currentBoard['1'] == 'O':
+                        currentBoard['9'] = 'O'
+                    elif currentBoard['9'] == 'O':
+                        currentBoard['1'] = 'O'
+                elif currentBoard['4'] and currentBoard['6'] != 'X': 
+                    if currentBoard['4'] == 'O':
+                        currentBoard['6'] = 'O'
+                    elif currentBoard['6'] == 'O':
+                        currentBoard['4'] = 'O'
+                elif currentBoard['8'] and currentBoard['2'] != 'X': 
+                    if currentBoard['8'] == 'O':
+                        currentBoard['2'] = 'O'
+                    elif currentBoard['2'] == 'O':
+                        currentBoard['8'] = 'O'
+            elif currentBoard['5'] == 'X':
+                if currentBoard['7'] and currentBoard['8'] and currentBoard['9'] != 'X': 
+                    if currentBoard['7'] and currentBoard['8'] == 'O':
+                        currentBoard['9'] = 'O'
+                    elif currentBoard['7'] and currentBoard['9'] == 'O':
+                        currentBoard['8'] = 'O'
+                    elif currentBoard['8'] and currentBoard['9'] == 'O':
+                        currentBoard['7'] = 'O'
+                elif currentBoard['7'] and currentBoard['4'] and currentBoard['1'] != 'X': 
+                    if currentBoard['7'] and currentBoard['4'] == 'O':
+                        currentBoard['1'] = 'O'
+                    elif currentBoard['7'] and currentBoard['1'] == 'O':
+                        currentBoard['4'] = 'O'
+                    elif currentBoard['1'] and currentBoard['4'] == 'O':
+                        currentBoard['7'] = 'O'
+                elif currentBoard['1'] and currentBoard['2'] and currentBoard['3'] != 'X': 
+                    if currentBoard['1'] and currentBoard['2'] == 'O':
+                        currentBoard['3'] = 'O'
+                    elif currentBoard['1'] and currentBoard['3'] == 'O':
+                        currentBoard['2'] = 'O'
+                    elif currentBoard['2'] and currentBoard['3'] == 'O':
+                        currentBoard['1'] = 'O'
+                elif currentBoard['9'] and currentBoard['6'] and currentBoard['3'] != 'X': 
+                    if currentBoard['9'] and currentBoard['6'] == 'O':
+                        currentBoard['3'] = 'O'
+                    elif currentBoard['9'] and currentBoard['3'] == 'O':
+                        currentBoard['6'] = 'O'
+                    elif currentBoard['3'] and currentBoard['6'] == 'O':
+                        currentBoard['9'] = 'O'
+            if boardAtStartOfTurn == currentBoard:
+                randomSelection = '5'
+                while currentBoard[randomSelection] in symbols:
+                    randomSelection = random.choice(list(currentBoard))
+                currentBoard[randomSelection] = 'O'
         if turn >= 5:
             if currentBoard['7'] == currentBoard['8'] == currentBoard['9']: 
                 result = "Game Over!"
