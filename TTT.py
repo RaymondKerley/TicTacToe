@@ -46,30 +46,38 @@ def playGame():
             currentBoard[selection] = 'X'  
 
         elif turn in computerTurn:
-            boardAtStartOfTurn = currentBoard
+            #boardAtStartOfTurn = currentBoard
+            totalPlayerMoves = sum(value == 'X' for value in currentBoard.values())   
+            totalComputerMoves = sum(value == 'O' for value in currentBoard.values())
+
             if currentBoard['5'] not in symbols:
                 currentBoard['5'] = 'O'
+                totalComputerMoves = sum(value == 'O' for value in currentBoard.values())
             elif currentBoard['5'] == 'O':
                 if currentBoard['7'] and currentBoard['3'] != 'X': 
                     if currentBoard['7'] == 'O':
                         currentBoard['3'] = 'O'
                     elif currentBoard['3'] == 'O':
                         currentBoard['7'] = 'O'
-                elif currentBoard['1'] and currentBoard['9'] != 'X': 
+                totalComputerMoves = sum(value == 'O' for value in currentBoard.values())
+                if (currentBoard['1'] and currentBoard['9'] != 'X') and (totalPlayerMoves != totalComputerMoves): 
                     if currentBoard['1'] == 'O':
                         currentBoard['9'] = 'O'
                     elif currentBoard['9'] == 'O':
                         currentBoard['1'] = 'O'
-                elif currentBoard['4'] and currentBoard['6'] != 'X': 
+                totalComputerMoves = sum(value == 'O' for value in currentBoard.values())
+                if (currentBoard['4'] and currentBoard['6'] != 'X') and (totalPlayerMoves != totalComputerMoves): 
                     if currentBoard['4'] == 'O':
                         currentBoard['6'] = 'O'
                     elif currentBoard['6'] == 'O':
                         currentBoard['4'] = 'O'
-                elif currentBoard['8'] and currentBoard['2'] != 'X': 
+                totalComputerMoves = sum(value == 'O' for value in currentBoard.values())
+                if (currentBoard['8'] and currentBoard['2'] != 'X') and (totalPlayerMoves != totalComputerMoves): 
                     if currentBoard['8'] == 'O':
                         currentBoard['2'] = 'O'
                     elif currentBoard['2'] == 'O':
                         currentBoard['8'] = 'O'
+                totalComputerMoves = sum(value == 'O' for value in currentBoard.values())
             elif currentBoard['5'] == 'X':
                 if currentBoard['7'] and currentBoard['8'] and currentBoard['9'] != 'X': 
                     if currentBoard['7'] and currentBoard['8'] == 'O':
@@ -78,32 +86,45 @@ def playGame():
                         currentBoard['8'] = 'O'
                     elif currentBoard['8'] and currentBoard['9'] == 'O':
                         currentBoard['7'] = 'O'
-                elif currentBoard['7'] and currentBoard['4'] and currentBoard['1'] != 'X': 
+                totalComputerMoves = sum(value == 'O' for value in currentBoard.values())
+                if (currentBoard['7'] and currentBoard['4'] and currentBoard['1'] != 'X') and (totalPlayerMoves != totalComputerMoves): 
                     if currentBoard['7'] and currentBoard['4'] == 'O':
                         currentBoard['1'] = 'O'
                     elif currentBoard['7'] and currentBoard['1'] == 'O':
                         currentBoard['4'] = 'O'
                     elif currentBoard['1'] and currentBoard['4'] == 'O':
                         currentBoard['7'] = 'O'
-                elif currentBoard['1'] and currentBoard['2'] and currentBoard['3'] != 'X': 
+                totalComputerMoves = sum(value == 'O' for value in currentBoard.values())
+                if (currentBoard['1'] and currentBoard['2'] and currentBoard['3'] != 'X') and (totalPlayerMoves != totalComputerMoves): 
                     if currentBoard['1'] and currentBoard['2'] == 'O':
                         currentBoard['3'] = 'O'
                     elif currentBoard['1'] and currentBoard['3'] == 'O':
                         currentBoard['2'] = 'O'
                     elif currentBoard['2'] and currentBoard['3'] == 'O':
                         currentBoard['1'] = 'O'
-                elif currentBoard['9'] and currentBoard['6'] and currentBoard['3'] != 'X': 
+                totalComputerMoves = sum(value == 'O' for value in currentBoard.values())
+                if (currentBoard['9'] and currentBoard['6'] and currentBoard['3'] != 'X') and (totalPlayerMoves != totalComputerMoves): 
                     if currentBoard['9'] and currentBoard['6'] == 'O':
                         currentBoard['3'] = 'O'
                     elif currentBoard['9'] and currentBoard['3'] == 'O':
                         currentBoard['6'] = 'O'
                     elif currentBoard['3'] and currentBoard['6'] == 'O':
                         currentBoard['9'] = 'O'
-            if boardAtStartOfTurn == currentBoard:
+                totalComputerMoves = sum(value == 'O' for value in currentBoard.values())
+
+             
+
+            if totalPlayerMoves != totalComputerMoves:
                 randomSelection = '5'
                 while currentBoard[randomSelection] in symbols:
                     randomSelection = random.choice(list(currentBoard))
                 currentBoard[randomSelection] = 'O'
+
+            # if boardAtStartOfTurn == currentBoard:
+            #     randomSelection = '5'
+            #     while currentBoard[randomSelection] in symbols:
+            #         randomSelection = random.choice(list(currentBoard))
+            #     currentBoard[randomSelection] = 'O'
         if turn >= 5:
             if currentBoard['7'] == currentBoard['8'] == currentBoard['9']: 
                 result = "Game Over!"
